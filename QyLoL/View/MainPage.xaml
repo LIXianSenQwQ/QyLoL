@@ -54,7 +54,7 @@
             <TextBox Grid.Column="2"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     pu:TextBoxHelper.ClearButtonVisibility="Visible"
+                     Text="{Binding SelectText}"
                      TextChanged="TextBox_TextChanged" />
         </Grid>
         <pu:Drawer Grid.Row="1"
@@ -101,10 +101,10 @@
         <ListBox Grid.Row="2"
                  HorizontalAlignment="Stretch"
                  HorizontalContentAlignment="Stretch"
-                 pu:ListBoxHelper.ItemClick="ListBox_ItemClick"
                  pu:ListBoxHelper.ItemsMargin="0,0,0,5"
                  ItemsSource="{Binding MainChampionList}"
-                 ScrollViewer.CanContentScroll="False"
+                 MouseLeftButtonUp="ListBox_MouseLeftButtonUp"
+                 ScrollViewer.CanContentScroll="True"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
                  VirtualizingStackPanel.IsVirtualizing="True"
                  VirtualizingStackPanel.VirtualizationMode="Recycling"

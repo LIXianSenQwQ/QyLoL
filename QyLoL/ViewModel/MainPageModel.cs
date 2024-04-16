@@ -13,7 +13,10 @@ namespace QyLoL.ViewModel
 {
     public class MainPageModel : NotifyPropertyChangedBase
     {
+        private string selectText = string.Empty;
+
         private Visibility isShowLoading = Visibility.Visible;
+
         private Visibility isShowChampion = Visibility.Collapsed;
 
         private ObservableCollection<ChampionInfo> mainChampionList = new();
@@ -27,6 +30,16 @@ namespace QyLoL.ViewModel
         public ObservableCollection<ChampionInfo> MainChampionList { get => mainChampionList; set => Set(ref mainChampionList, value); }
         public Visibility IsShowChampion { get => isShowChampion; set => Set(ref isShowChampion, value); }
         public Visibility IsShowLoading { get => isShowLoading; set => Set(ref isShowLoading, value); }
+        public string SelectText { get => selectText;
+            set
+            {
+                if (value != selectText)
+                {
+                    selectText = value;
+                    NotifyOfPropertyChange("SelectText");
+                }
+            }
+        }
 
         public List<ChampionInfo> MainChampionAllList = new();
 

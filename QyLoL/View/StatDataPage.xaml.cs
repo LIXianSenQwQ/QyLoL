@@ -43,17 +43,5 @@ namespace QyLoL.View
                 }
             }
         }
-
-        private void Page_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            //if (e.ChangedButton == MouseButton.XButton1 )
-            //{
-            //    // 处理鼠标侧键按下事件
-            //    if (NavigationService.CanGoBack)
-            //    {
-            //        NavigationService.GoBack();
-            //    }
-            //}
-        }
     }
 }

@@ -12,7 +12,6 @@ namespace QyLoL
     public partial class MainWindow : WindowX
     {
 
-        private static Dictionary<string, Page> dicPage = new();
         public MainWindow()
         {
             InitializeComponent();
@@ -25,21 +24,12 @@ namespace QyLoL
         /// </summary>
         private void InitFramePage()
         {
-            dicPage.Add("MainPage", new MainPage(this));
-            dicPage.Add("StatDataPage", new StatDataPage());
-            MainContentFrame.Navigate(dicPage["MainPage"]);
+            MainContentFrame.Navigate(new MainPage(this));
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        public void SwitchPage(Page page)
         {
-            var btn = (Button)sender;
-            var page = dicPage[btn.Tag.ToString()!];
             MainContentFrame.Navigate(page);
-        }
-
-        public void SwitchPage(string pageName)
-        {
-            MainContentFrame.Navigate(dicPage[pageName]);
         }
     }
 }

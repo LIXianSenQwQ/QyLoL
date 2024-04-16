@@ -7,7 +7,7 @@
             xmlns:pu="https://opensource.panuon.com/wpf-ui"
             Title="MainWindow"
             Width="350"
-            Height="500"
+            Height="520"
             Padding="5"
             pu:WindowStartupLocation="CenterScreen"
             pu:WindowXCaption.Buttons="MinimizeClose"
@@ -15,31 +15,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="0" />
         </Grid.RowDefinitions>
         <Frame x:Name="MainContentFrame"
                Grid.Row="0"
                NavigationUIVisibility="Hidden" />
-        <pu:Drawer Grid.Row="1"
-                   MaxHeight="45"
-                   VerticalAlignment="Bottom"
-                   Placement="Bottom"
-                   Visibility="Collapsed">
-            <pu:GridX>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Button Margin="1,0"
-                        Click="Button_Click"
-                        Content="列表"
-                        Tag="MainPage" />
-                <Button Grid.Column="1"
-                        Margin="1,0"
-                        Click="Button_Click"
-                        Content="详情"
-                        Tag="StatDataPage" />
-            </pu:GridX>
-        </pu:Drawer>
     </Grid>
 </pu:WindowX>

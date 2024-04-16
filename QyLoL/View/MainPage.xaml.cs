@@ -19,6 +19,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using Panuon.WPF.UI;
+using System.Xml.Linq;
 
 namespace QyLoL.View
 {
@@ -29,9 +30,9 @@ namespace QyLoL.View
     {
         private readonly MainPageModel viewModel = new();
 
-        private Thread? queryChampionThread;
 
         private MainWindow _windowX;
+
         public MainPage(MainWindow windowX)
         {
             InitializeComponent();
@@ -69,28 +70,34 @@ namespace QyLoL.View
             viewModel.IsShowChampion = Visibility.Visible;
 
             //获取键
-            var action = (() =>
-            {
-                try
-                {
-
-                    foreach (var item in viewModel.MainChampionAllList)
-                    {
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            viewModel.MainChampionList.Add(item);
-                        });
-                        // 加入延迟防止卡顿
-                        Thread.Sleep(50);
-                    }
-                }
-                catch (ThreadInterruptedException)
-                {
-                    return;
-                }
-            });
-            queryChampionThread = new Thread(new ThreadStart(action));
+            var queryChampionThread = new Thread(new ThreadStart(SelectChampion()));
             queryChampionThread.Start();
+        }
+
+
+        private Action SelectChampion()
+        {
+            return new Action(() =>
+            {
+                var filteredList = viewModel.MainChampionAllList.Where(item =>
+                {
+                    if (!string.IsNullOrEmpty(viewModel.SelectText))
+                    {
+                        return item.Name.Contains(viewModel.SelectText) || item.Title.Contains(viewModel.SelectText);
+                    }
+                    return true;
+                }
+                ).ToList();
+
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    viewModel.MainChampionList.Clear();
+                    foreach (var item in filteredList)
+                    {
+                        viewModel.MainChampionList.Add(item);
+                    }
+                });
+            });
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,53 +117,30 @@ namespace QyLoL.View
         {
             // 搜索
             var txtBox = (TextBox)sender;
-            string name = txtBox.Text;
-
+            viewModel.SelectText = txtBox.Text;
             // 如果上一个线程还在运行，取消它
-            if (queryChampionThread != null && queryChampionThread.IsAlive)
-            {
-                queryChampionThread.Interrupt();
-            }
-            var action = new Action(() =>
-            {
-                try
-                {
-                    var filteredList = viewModel.MainChampionAllList.Where(item =>
-                            item.Name.Contains(name) ||
-                            item.Title.Contains(name)
-                        ).ToList();
-                    Application.Current.Dispatcher.InvokeAsync(() =>
-                    {
-                        viewModel.MainChampionList.Clear();
-                    });
-
-                    foreach (var item in filteredList)
-                    {
-                        Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            viewModel.MainChampionList.Add(item);
-                        });
-                        // 加入延迟防止卡顿
-                        Thread.Sleep(50);
-                    }
-                }
-                catch (ThreadInterruptedException)
-                {
-                    return;
-                }
-            });
-
-            queryChampionThread = new Thread(new ThreadStart(action));
+            //if (queryChampionThread != null && queryChampionThread.IsAlive)
+            //{
+            //    queryChampionThread.Interrupt();
+            //}
+            var queryChampionThread = new Thread(new ThreadStart(SelectChampion()));
             queryChampionThread.Start();
         }
 
         private void ListBox_ItemClick(object sender, RoutedEventArgs e)
         {
-            _windowX.SwitchPage("StatDataPage");
-            if (queryChampionThread != null && queryChampionThread.IsAlive)
+            //MouseButtonEventArgs buttonEventArgs = e.OriginalSource as MouseButtonEventArgs;
+            NavigationService.Navigate(new StatDataPage());
+
+        }
+        private void ListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var view = sender as ListBox;
+            if (view != null && view.SelectedIndex > 0)
             {
-                queryChampionThread.Interrupt();
+                NavigationService.Navigate(new StatDataPage());
             }
+
         }
     }
 }
