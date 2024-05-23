@@ -15,7 +15,6 @@
             <EventTrigger.Actions>
                 <BeginStoryboard>
                     <Storyboard>
-                        <!--<ThicknessAnimation Duration="0:0:.85" Storyboard.TargetProperty="Margin" From="900,0,-900,0" To="0" DecelerationRatio=".9" />-->
                         <ThicknessAnimation DecelerationRatio=".9"
                                             Storyboard.TargetProperty="Margin"
                                             From="-50,0,50,0"
@@ -30,19 +29,27 @@
             </EventTrigger.Actions>
         </EventTrigger>
     </Page.Triggers>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+    <pu:GridX>
+        <pu:GridX.RowDefinitions>
+            <RowDefinition Height="Auto" />
             <RowDefinition />
-        </Grid.RowDefinitions>
-        <ToggleButton pu:IconHelper.FontFamily="{StaticResource iconfont}"
-                      pu:ToggleButtonHelper.Icon="&#xe8f1;"
-                      Click="Button_Click"
-                      Content="&#xe8f1;"
-                      FontFamily="{DynamicResource iconfont}" />
+        </pu:GridX.RowDefinitions>
+        <pu:GridX>
+            <!--<pu:GridX.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition />
+            </pu:GridX.ColumnDefinitions>-->
+            <ToggleButton Margin="0,-0,0,0"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Background="Transparent"
+                          Click="Button_Click"
+                          Content="&#xe625;"
+                          FontFamily="{DynamicResource iconfont}"
+                          FontSize="30" />
+        </pu:GridX>
         <Grid Grid.Row="1"
-              HorizontalAlignment="Stretch"
-              VerticalAlignment="Stretch"
-              Background="Red" />
-    </Grid>
+              Background="AliceBlue" />
+
+    </pu:GridX>
 </Page>

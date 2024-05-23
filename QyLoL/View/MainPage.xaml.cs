@@ -39,6 +39,8 @@ namespace QyLoL.View
             this._windowX = windowX;
             this.DataContext = viewModel;
             Task.Run(() => { InitChampionList(); });
+
+            
         }
 
         private async void InitChampionList()
@@ -118,25 +120,14 @@ namespace QyLoL.View
             // 搜索
             var txtBox = (TextBox)sender;
             viewModel.SelectText = txtBox.Text;
-            // 如果上一个线程还在运行，取消它
-            //if (queryChampionThread != null && queryChampionThread.IsAlive)
-            //{
-            //    queryChampionThread.Interrupt();
-            //}
             var queryChampionThread = new Thread(new ThreadStart(SelectChampion()));
             queryChampionThread.Start();
         }
 
-        private void ListBox_ItemClick(object sender, RoutedEventArgs e)
-        {
-            //MouseButtonEventArgs buttonEventArgs = e.OriginalSource as MouseButtonEventArgs;
-            NavigationService.Navigate(new StatDataPage());
-
-        }
         private void ListBox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var view = sender as ListBox;
-            if (view != null && view.SelectedIndex > 0)
+            if (view != null && view.SelectedIndex >= 0)
             {
                 NavigationService.Navigate(new StatDataPage());
             }

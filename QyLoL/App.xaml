@@ -11,6 +11,7 @@
                 <ResourceDictionary>
                     <FontFamily x:Key="iconfont">/QyLoL;component/Resources/Fonts/#iconfont</FontFamily>
                 </ResourceDictionary>
+                <ResourceDictionary Source="/QyLoL;component/Style/ViewStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

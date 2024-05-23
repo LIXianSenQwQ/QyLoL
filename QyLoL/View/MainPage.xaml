@@ -58,10 +58,10 @@
                      TextChanged="TextBox_TextChanged" />
         </Grid>
         <pu:Drawer Grid.Row="1"
-                   MaxHeight="30"
+                   MaxHeight="80"
                    VerticalAlignment="Bottom"
                    IsOpen="{Binding LxVis}"
-                   Placement="Bottom">
+                   Placement="Top">
             <pu:GridX>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -71,23 +71,24 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <ToggleButton Margin="1,0"
-                              Content="ALL" />
+                <ToggleButton Content="&#xe601;"
+                              Style="{StaticResource PositionIconButton}" />
                 <ToggleButton Grid.Column="1"
-                              Margin="1,0"
-                              Content="上" />
+                              Style="{StaticResource PositionIconButton}">
+                    <Image Source="/QyLoL;component/Resources/Svg/1233.png" />
+                </ToggleButton>
                 <ToggleButton Grid.Column="2"
-                              Margin="1,0"
-                              Content="野" />
+                              Content="&#xe620;"
+                              Style="{StaticResource PositionIconButton}" />
                 <ToggleButton Grid.Column="3"
-                              Margin="1,0"
-                              Content="中" />
+                              Content="&#xe61b;"
+                              Style="{StaticResource PositionIconButton}" />
                 <ToggleButton Grid.Column="4"
-                              Margin="1,0"
-                              Content="下" />
+                              Content="&#xe61d;"
+                              Style="{StaticResource PositionIconButton}" />
                 <ToggleButton Grid.Column="5"
-                              Margin="1,0"
-                              Content="辅" />
+                              Content="&#xe68d;"
+                              Style="{StaticResource PositionIconButton}" />
             </pu:GridX>
 
         </pu:Drawer>

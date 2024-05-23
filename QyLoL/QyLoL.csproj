@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <None Remove="Resources\Fonts\iconfont.ttf" />
+    <None Remove="Resources\Svg\123.svg" />
+    <None Remove="Resources\Svg\1233.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,11 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Style\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\Fonts\iconfont.ttf" />
+    <Resource Include="Resources\Svg\123.svg" />
+    <Resource Include="Resources\Svg\1233.png" />
   </ItemGroup>
 
 </Project>
